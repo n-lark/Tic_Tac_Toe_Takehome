@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import React, { useState, useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faCircle } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faCircle, faPaw } from "@fortawesome/free-solid-svg-icons";
 import { SquaresContext } from "./Context/SquaresContext";
 import { DifficultyLevelContext } from "./Context/DifficultyLevelContext";
+import { isCatsScratch } from "./Utility/isCatsScratch";
 
 type GridType = {
   rowLength: number;
@@ -17,18 +19,29 @@ type RowColumnType = {
 
 export const Game: React.FC = () => {
   const [xTurn, setXTurn] = useState<boolean>(true);
-  const { squaresGrid, rowLength, markX, markO } = useContext(SquaresContext);
+  const [catsScratch, setCatsScratch] = useState<boolean>(false);
+  const { squaresGrid, generateSquaresGrid, rowLength, markX, markO } =
+    useContext(SquaresContext);
   const { levelHard } = useContext(DifficultyLevelContext);
 
   useEffect(() => {
+    if (isCatsScratch(squaresGrid)) {
+      return setCatsScratch(true);
+    }
     if (!xTurn) {
       markO(levelHard);
       setXTurn(!xTurn);
     }
-  }, [xTurn, markO, levelHard]);
+  }, [xTurn, markO, levelHard, squaresGrid]);
 
   return (
     <StyledWrapper>
+      {catsScratch && (
+        <StyledGameVerdictBanner>
+          Cats Scratch{" "}
+          <FontAwesomeIcon style={{ color: "lightgrey" }} icon={faPaw} />
+        </StyledGameVerdictBanner>
+      )}
       <StyledGrid rowLength={rowLength}>
         {squaresGrid.map((square, row) => {
           return square.map((piece, column) => {
@@ -69,25 +82,36 @@ export const Game: React.FC = () => {
           });
         })}
       </StyledGrid>
+      <StyledLink to="/">
+        <StyledButton onClick={() => generateSquaresGrid(3, 9)}>
+          New Game
+        </StyledButton>
+      </StyledLink>
     </StyledWrapper>
   );
 };
 
-// const StyledButton = styled.button`
-//   color: #595959;
-//   font-size: 20px;
-//   padding: 10px 16px;
-//   border: 1px solid lightgray;
-//   background-color: white;
-//   border-radius: 8px;
-//   outline: none;
-//   font-family: "Work Sans", sans-serif;
-// `;
+const StyledButton = styled.button`
+  color: #595959;
+  font-size: 20px;
+  padding: 10px 16px;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 8px;
+  outline: none;
+`;
 
-// const StyledLink = styled(Link)`
-//   margin: auto;
-//   border-radius: 10px;
-// `;
+const StyledLink = styled(Link)`
+  border-radius: 10px;
+  margin-bottom: 15px;
+`;
+
+const StyledGameVerdictBanner = styled.div`
+  font-size: 34px;
+  color: #595959;
+  padding-top: 25px;
+  position: fixed;
+`;
 
 const StyledDiv = styled.div<RowColumnType>`
   border-right: ${({ columnIndex, rowLength }) =>
@@ -124,6 +148,6 @@ const StyledWrapper = styled.div`
   box-shadow: 10px 5px 5px lightgray;
   margin: 10px;
   width: 700px;
-  height: 600px;
+  height: 700px;
   font-family: "Work Sans", sans-serif;
 `;

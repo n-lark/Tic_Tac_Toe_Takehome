@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { SquaresContext } from "./Context/SquaresContext";
@@ -7,10 +7,10 @@ import { DifficultyLevelContext } from "./Context/DifficultyLevelContext";
 export const GameStart: React.FC = () => {
   const { generateSquaresGrid } = useContext(SquaresContext);
   const { determineDifficultyLevel } = useContext(DifficultyLevelContext);
+
   return (
     <StyledWrapper>
       <StyledHeading>Tic Tac Toe</StyledHeading>
-      <StyledBy>By Noley Holland</StyledBy>
       <StyledRadioLabel>Grid Size</StyledRadioLabel>
       <StyledRadioWrapper>
         <StyledLabel>
@@ -115,16 +115,10 @@ const StyledInput = styled.input`
       }
 `;
 
-const StyledBy = styled.div`
-  font-weight: normal;
-  color: lightgrey;
-  padding-bottom: 30px;
-`;
-
 const StyledHeading = styled.h1`
   font-size: 65px;
   font-weight: normal;
-  margin-top: 70px;
+  margin-top: 120px;
   color: #595959;
 `;
 
@@ -152,6 +146,6 @@ const StyledWrapper = styled.div`
   box-shadow: 10px 5px 5px lightgray;
   margin: 10px;
   width: 700px;
-  height: 600px;
+  height: 700px;
   font-family: "Work Sans", sans-serif;
 `;
