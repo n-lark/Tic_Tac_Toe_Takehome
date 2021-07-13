@@ -1,16 +1,31 @@
 import styled from "styled-components";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faCircle } from "@fortawesome/free-solid-svg-icons";
 import { SquaresContext } from "./Context/SquaresContext";
+import { DifficultyLevelContext } from "./Context/DifficultyLevelContext";
 
 type GridType = {
   rowLength: number;
 };
 
+type RowColumnType = {
+  rowIndex: number;
+  columnIndex: number;
+  rowLength: number;
+};
+
 export const Game: React.FC = () => {
   const [xTurn, setXTurn] = useState<boolean>(true);
-  const { squaresGrid, rowLength } = useContext(SquaresContext);
+  const { squaresGrid, rowLength, markX, markO } = useContext(SquaresContext);
+  const { levelHard } = useContext(DifficultyLevelContext);
 
-  console.log(squaresGrid, rowLength, xTurn);
+  useEffect(() => {
+    if (!xTurn) {
+      markO(levelHard);
+      setXTurn(!xTurn);
+    }
+  }, [xTurn, markO, levelHard]);
 
   return (
     <StyledWrapper>
@@ -18,8 +33,37 @@ export const Game: React.FC = () => {
         {squaresGrid.map((square, row) => {
           return square.map((piece, column) => {
             return (
-              <StyledDiv key={column} onClick={() => setXTurn(!xTurn)}>
-                {!piece.x && !piece.o && <StyledBlankSpan />}
+              <StyledDiv
+                key={column}
+                rowIndex={row}
+                columnIndex={column}
+                rowLength={rowLength}
+                onClick={() => {
+                  if (
+                    squaresGrid[row][column].x ||
+                    squaresGrid[row][column].o ||
+                    !xTurn
+                  ) {
+                    return null;
+                  }
+                  if (xTurn) {
+                    markX(xTurn, row, column);
+                    setXTurn(!xTurn);
+                  }
+                }}
+              >
+                {piece.x && (
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    style={{ fontSize: "48px" }}
+                  />
+                )}
+                {piece.o && (
+                  <FontAwesomeIcon
+                    icon={faCircle}
+                    style={{ fontSize: "48px" }}
+                  />
+                )}
               </StyledDiv>
             );
           });
@@ -45,26 +89,27 @@ export const Game: React.FC = () => {
 //   border-radius: 10px;
 // `;
 
-const StyledBlankSpan = styled.span`
-  width: 30px;
-  height: 30px;
-`;
-
-const StyledDiv = styled.div`
-  border: 0.5px solid lightgrey;
+const StyledDiv = styled.div<RowColumnType>`
+  border-right: ${({ columnIndex, rowLength }) =>
+    columnIndex === rowLength - 1 ? "none" : "2px solid lightgrey"};
+  border-left: ${({ columnIndex }) =>
+    columnIndex === 0 ? "none" : "2px solid lightgrey"};
+  border-top: ${({ rowIndex }) =>
+    rowIndex === 0 ? "none" : "2px solid lightgrey"};
+  border-bottom: ${({ rowIndex, rowLength }) =>
+    rowIndex === rowLength - 1 ? "none" : "2px solid lightgrey"};
   color: #595959;
-  box-shadow: inset 1px 1px grey;
 `;
 
 const StyledGrid = styled.div<GridType>`
   display: grid;
+  margin: auto;
   grid-template-columns: repeat(
     ${({ rowLength }) => rowLength},
-    minmax(0, 30px)
+    minmax(0, 90px)
   );
-  border: 0.5px solid lightgray;
   > div {
-    height: 30px;
+    height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
