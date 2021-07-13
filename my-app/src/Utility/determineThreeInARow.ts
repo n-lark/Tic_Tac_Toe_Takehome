@@ -38,16 +38,26 @@ export const determineThreeInARow = (
   ];
   const flatArray = squaresArray.flat();
   let won = false;
+  let winner = "";
 
   for (let i = 0; i < winningRows.length; i++) {
     const [a, b, c] = winningRows[i];
     if (
-      flatArray[a] &&
-      flatArray[a] === flatArray[b] &&
-      flatArray[a] === flatArray[c]
+      flatArray[a].x &&
+      flatArray[a].x === flatArray[b].x &&
+      flatArray[a].x === flatArray[c].x
     ) {
       won = true;
+      winner = "x";
+    }
+    if (
+      flatArray[a].o &&
+      flatArray[a].o === flatArray[b].o &&
+      flatArray[a].o === flatArray[c].o
+    ) {
+      won = true;
+      winner = "o";
     }
   }
-  return won;
+  return { won, winner };
 };
