@@ -6,8 +6,10 @@ import { faTimes, faCircle, faPaw } from "@fortawesome/free-solid-svg-icons";
 import { SquaresContext } from "./Context/SquaresContext";
 import { DifficultyLevelContext } from "./Context/DifficultyLevelContext";
 import { TimerContext } from "./Context/TimerContext";
+import { HighScoreAndGamesWonContext } from "./Context/HighScoreAndGamesWonContext";
 import { isCatsScratch } from "./Utility/isCatsScratch";
 import { Timer } from "./Timer";
+import { HighScore } from "./HighScore";
 import { determineThreeInARow } from "./Utility/determineThreeInARow";
 
 type GridType = {
@@ -33,9 +35,12 @@ export const Game: React.FC = () => {
   const { squaresGrid, generateSquaresGrid, rowLength, markX, markO } =
     useContext(SquaresContext);
   const { levelHard } = useContext(DifficultyLevelContext);
-  const { incrementTimer } = useContext(TimerContext);
+  const { timer, incrementTimer } = useContext(TimerContext);
+  const { numOfGamesWon, determineHighScoreAndGamesWon } = useContext(
+    HighScoreAndGamesWonContext
+  );
 
-  console.log("WINNER", gameWon);
+  console.log("GAMES", numOfGamesWon);
 
   useEffect(() => {
     const gameTimer = setInterval(() => {
@@ -79,7 +84,10 @@ export const Game: React.FC = () => {
   return (
     <>
       <StyledWrapper>
-        <Timer />
+        <StyledStatsWrapper>
+          <Timer />
+          {numOfGamesWon > 0 && <HighScore />}
+        </StyledStatsWrapper>
         {catsScratch && (
           <StyledGameVerdictBanner>
             Cats Scratch{" "}
@@ -143,7 +151,10 @@ export const Game: React.FC = () => {
                     if (
                       squaresGrid[row][column].x ||
                       squaresGrid[row][column].o ||
-                      !xTurn
+                      !xTurn ||
+                      catsScratch ||
+                      gameWon ||
+                      gameLost
                     ) {
                       return null;
                     }
@@ -171,7 +182,12 @@ export const Game: React.FC = () => {
           })}
         </StyledGrid>
         <StyledLink to="/">
-          <StyledButton onClick={() => generateSquaresGrid(3, 9)}>
+          <StyledButton
+            onClick={() => {
+              determineHighScoreAndGamesWon(timer, gameWon);
+              generateSquaresGrid(3, 9);
+            }}
+          >
             New Game
           </StyledButton>
         </StyledLink>
@@ -209,10 +225,15 @@ function flicker() {
   `;
 }
 
+const StyledStatsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+
 const StyledGameWonBanner = styled.div`
   color: #cc3d3d;
   font-size: 48px;
-  padding: 16px;
   animation: ${flicker} 5s linear infinite;
 `;
 
@@ -254,7 +275,7 @@ const StyledLink = styled(Link)`
 const StyledGameVerdictBanner = styled.div`
   font-size: 34px;
   color: #595959;
-  padding-top: 25px;
+  padding: 5px;
   position: fixed;
 `;
 

@@ -4,13 +4,16 @@ import App from "./App";
 import { SquaresContextProvider } from "./Context/SquaresContext";
 import { DifficultyLevelProvider } from "./Context/DifficultyLevelContext";
 import { TimerContextProvider } from "./Context/TimerContext";
+import { HighScoreAndGamesWonContextProvider } from "./Context/HighScoreAndGamesWonContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <SquaresContextProvider>
       <DifficultyLevelProvider>
         <TimerContextProvider>
-          <App />
+          <HighScoreAndGamesWonContextProvider>
+            <App />
+          </HighScoreAndGamesWonContextProvider>
         </TimerContextProvider>
       </DifficultyLevelProvider>
     </SquaresContextProvider>
