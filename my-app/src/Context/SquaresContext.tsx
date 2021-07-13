@@ -72,9 +72,6 @@ export const SquaresContextProvider: React.FC = ({ children }) => {
         if (squaresGrid[row][column] === piece && xTurn) {
           piece.x = true;
         }
-        if (squaresGrid[row][column] === piece && !xTurn) {
-          piece.o = true;
-        }
         return piece;
       });
     });
