@@ -20,11 +20,18 @@ type RowColumnType = {
 export const Game: React.FC = () => {
   const [xTurn, setXTurn] = useState<boolean>(true);
   const [catsScratch, setCatsScratch] = useState<boolean>(false);
+  const [gameWon, setGameWon] = useState<boolean>(false);
   const { squaresGrid, generateSquaresGrid, rowLength, markX, markO } =
     useContext(SquaresContext);
   const { levelHard } = useContext(DifficultyLevelContext);
 
   useEffect(() => {
+    // if (rowLength === 3 && determineThreeInARow()) {
+    //   return setGameWon(true);
+    // }
+    // if (rowLength > 3 && determineFourInARow()) {
+    //   return setGameWon(true);
+    // }
     if (isCatsScratch(squaresGrid)) {
       return setCatsScratch(true);
     }
@@ -32,7 +39,7 @@ export const Game: React.FC = () => {
       markO(levelHard);
       setXTurn(!xTurn);
     }
-  }, [xTurn, markO, levelHard, squaresGrid]);
+  }, [xTurn, markO, levelHard, squaresGrid, rowLength]);
 
   return (
     <StyledWrapper>
