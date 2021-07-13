@@ -105,10 +105,7 @@ export const SquaresContextProvider: React.FC = ({ children }) => {
     if (levelHard) {
       const oPlayedMoves = findPlayedOCoordinates(squaresGrid);
 
-      console.log("O Has Played:", oPlayedMoves);
-
       if (oPlayedMoves.length === 0) {
-        console.log("FIRST");
         let played = false;
         const squaresGridWithOFirstMove = squaresGrid.map((square) => {
           return square.map((piece) => {
@@ -123,7 +120,6 @@ export const SquaresContextProvider: React.FC = ({ children }) => {
       }
 
       if (oPlayedMoves.length > 0) {
-        console.log("SECOND");
         const squaresGridWithOMove = calculateNextOMove(
           squaresGrid,
           oPlayedMoves
