@@ -264,7 +264,9 @@ const StyledStatsWrapper = styled.div`
 
 const StyledGameWonBanner = styled.div`
   color: #cc3d3d;
-  font-size: 48px;
+  font-size: 36px;
+  padding-top: 25px;
+  position: fixed;
   animation: ${flicker} 5s linear infinite;
 `;
 
@@ -274,7 +276,7 @@ const StyledInlineWrapper = styled.div`
 
 const animation = keyframes`
   0% { top: -12px; }
-  100% { top: 500px; }
+  100% { top: 600px; }
 `;
 
 const StyledIcon = styled.span<IconType>`
@@ -296,6 +298,7 @@ const StyledButton = styled.button`
   background-color: white;
   border-radius: 8px;
   outline: none;
+  font-family: "Raleway", sans-serif;
 `;
 
 const StyledLink = styled(Link)`
@@ -346,5 +349,5 @@ const StyledWrapper = styled.div`
   margin: 10px;
   width: 700px;
   height: 700px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
 `;

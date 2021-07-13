@@ -121,9 +121,10 @@ const StyledInput = styled.input`
 
 const StyledHeading = styled.h1`
   font-size: 65px;
-  font-weight: normal;
+  font-weight: bold;
   margin-top: 120px;
   color: #595959;
+  font-family: "Tourney", cursive;
 `;
 
 const StyledButton = styled.button`
@@ -134,7 +135,7 @@ const StyledButton = styled.button`
   background-color: white;
   border-radius: 8px;
   outline: none;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
 `;
 
 const StyledLink = styled(Link)`
@@ -151,5 +152,5 @@ const StyledWrapper = styled.div`
   margin: 10px;
   width: 700px;
   height: 700px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
 `;
