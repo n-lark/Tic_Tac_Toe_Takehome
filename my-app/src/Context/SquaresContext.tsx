@@ -1,5 +1,7 @@
 import React, { useState, createContext } from "react";
 import { getRandomUnusedIndex } from "../Utility/getRandomUnusedIndex";
+import { findPlayedOCoordinates } from "../Utility/findPlayedOCoordinates";
+import { calculateNextOMove } from "../Utility/calculateNextOMove";
 
 type SquareType = {
   x: boolean;
@@ -99,6 +101,35 @@ export const SquaresContextProvider: React.FC = ({ children }) => {
       });
 
       setSquaresGrid(generatedSquares);
+    }
+    if (levelHard) {
+      const oPlayedMoves = findPlayedOCoordinates(squaresGrid);
+
+      console.log("O Has Played:", oPlayedMoves);
+
+      if (oPlayedMoves.length === 0) {
+        console.log("FIRST");
+        let played = false;
+        const squaresGridWithOFirstMove = squaresGrid.map((square) => {
+          return square.map((piece) => {
+            if (!piece.x && !played) {
+              piece.o = true;
+              played = true;
+            }
+            return piece;
+          });
+        });
+        return setSquaresGrid(squaresGridWithOFirstMove);
+      }
+
+      if (oPlayedMoves.length > 0) {
+        console.log("SECOND");
+        const squaresGridWithOMove = calculateNextOMove(
+          squaresGrid,
+          oPlayedMoves
+        );
+        return setSquaresGrid(squaresGridWithOMove);
+      }
     }
   };
 

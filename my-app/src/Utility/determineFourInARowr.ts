@@ -3,9 +3,7 @@ type SquareType = {
   o: boolean;
 };
 
-export const determineFourInARowForFourByFour = (
-  squaresArray: Array<Array<SquareType>>
-) => {
+export const determineFourInARow = (squaresArray: Array<Array<SquareType>>) => {
   const winningRows = [
     [0, 1, 2, 3],
     [4, 5, 6, 7],
@@ -24,21 +22,11 @@ export const determineFourInARowForFourByFour = (
 
   for (let i = 0; i < winningRows.length; i++) {
     const [a, b, c, d] = winningRows[i];
-    if (
-      flatArray[a].x &&
-      flatArray[a].x === flatArray[b].x &&
-      flatArray[a].x === flatArray[c].x &&
-      flatArray[a].x === flatArray[d].x
-    ) {
+    if (flatArray[a].x && flatArray[b].x && flatArray[c].x && flatArray[d].x) {
       won = true;
       winner = "x";
     }
-    if (
-      flatArray[a].o &&
-      flatArray[a].o === flatArray[b].o &&
-      flatArray[a].o === flatArray[c].o &&
-      flatArray[a].o === flatArray[d].o
-    ) {
+    if (flatArray[a].o && flatArray[b].o && flatArray[c].o && flatArray[d].o) {
       won = true;
       winner = "o";
     }

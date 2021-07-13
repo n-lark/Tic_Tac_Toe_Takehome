@@ -22,19 +22,11 @@ export const determineThreeInARow = (
 
   for (let i = 0; i < winningRows.length; i++) {
     const [a, b, c] = winningRows[i];
-    if (
-      flatArray[a].x &&
-      flatArray[a].x === flatArray[b].x &&
-      flatArray[a].x === flatArray[c].x
-    ) {
+    if (flatArray[a].x && flatArray[b].x && flatArray[c].x) {
       won = true;
       winner = "x";
     }
-    if (
-      flatArray[a].o &&
-      flatArray[a].o === flatArray[b].o &&
-      flatArray[a].o === flatArray[c].o
-    ) {
+    if (flatArray[a].o && flatArray[b].o && flatArray[c].o) {
       won = true;
       winner = "o";
     }

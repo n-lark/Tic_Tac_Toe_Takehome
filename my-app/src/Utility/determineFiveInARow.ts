@@ -3,9 +3,7 @@ type SquareType = {
   o: boolean;
 };
 
-export const determineFiveInARowForFiveByFive = (
-  squaresArray: Array<Array<SquareType>>
-) => {
+export const determineFiveInARow = (squaresArray: Array<Array<SquareType>>) => {
   const winningRows = [
     [0, 1, 2, 3, 4],
     [5, 6, 7, 8, 9],
@@ -28,20 +26,20 @@ export const determineFiveInARowForFiveByFive = (
     const [a, b, c, d, e] = winningRows[i];
     if (
       flatArray[a].x &&
-      flatArray[a].x === flatArray[b].x &&
-      flatArray[a].x === flatArray[c].x &&
-      flatArray[a].x === flatArray[d].x &&
-      flatArray[a].x === flatArray[e].x
+      flatArray[b].x &&
+      flatArray[c].x &&
+      flatArray[d].x &&
+      flatArray[e].x
     ) {
       won = true;
       winner = "x";
     }
     if (
       flatArray[a].o &&
-      flatArray[a].o === flatArray[b].o &&
-      flatArray[a].o === flatArray[c].o &&
-      flatArray[a].o === flatArray[d].o &&
-      flatArray[a].o === flatArray[e].o
+      flatArray[b].o &&
+      flatArray[c].o &&
+      flatArray[d].o &&
+      flatArray[e].o
     ) {
       won = true;
       winner = "o";
