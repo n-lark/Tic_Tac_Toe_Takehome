@@ -17,4 +17,5 @@ const StyledDiv = styled.div`
   color: #595959;
   width: 75px;
   font-size: 18px;
+  font-family: "Raleway", sans-serif;
 `;

@@ -60,7 +60,7 @@ const StyledIcon = styled.span`
 const StyledOopsError = styled.div`
   color: #595959;
   font-size: 30px;
-  margin: 60px;
+  margin: 50px;
   text-align: center;
 `;
 
@@ -72,6 +72,7 @@ const StyledButton = styled.button`
   background-color: white;
   border-radius: 8px;
   outline: none;
+  font-family: "Raleway", sans-serif;
 `;
 
 const StyledLink = styled(Link)`
@@ -88,5 +89,5 @@ const StyledWrapper = styled.div`
   margin: 10px;
   width: 700px;
   height: 700px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
 `;
