@@ -6,7 +6,7 @@ import { TimerContext } from "./Context/TimerContext";
 const Timer: React.FC = () => {
   const { timer } = useContext(TimerContext);
 
-  return <StyledDiv>{formatTime(timer)}</StyledDiv>;
+  return <StyledDiv data-cy="timer">{formatTime(timer)}</StyledDiv>;
 };
 
 export { Timer };

@@ -213,6 +213,7 @@ export const Game: React.FC = () => {
         </StyledGrid>
         <StyledLink to="/">
           <StyledButton
+            data-cy="new-game"
             onClick={() => {
               determineHighScoreAndGamesWon(timer, gameWon);
               generateSquaresGrid(3, 9);

@@ -38,7 +38,6 @@ export const GameStart: React.FC = () => {
         </StyledLabel>
         <StyledLabel>
           <StyledInput
-            data-cy="chose-level-hard"
             value="hard"
             type="radio"
             name="level"
@@ -69,7 +68,7 @@ export const GameStart: React.FC = () => {
         </StyledLabel>
       </StyledRadioWrapper>
       <StyledLink to="./Game">
-        <StyledButton>Play Game</StyledButton>
+        <StyledButton data-cy="start-game">Play Game</StyledButton>
       </StyledLink>
     </StyledWrapper>
   );
