@@ -11,6 +11,8 @@ import { isCatsScratch } from "./Utility/isCatsScratch";
 import { Timer } from "./Timer";
 import { HighScore } from "./HighScore";
 import { determineThreeInARow } from "./Utility/determineThreeInARow";
+import { determineFourInARowForFourByFour } from "./Utility/determineFourInARowForFourByFour";
+import { determineFiveInARowForFiveByFive } from "./Utility/determineFiveInARowForFiveByFive";
 
 type GridType = {
   rowLength: number;
@@ -40,8 +42,6 @@ export const Game: React.FC = () => {
     HighScoreAndGamesWonContext
   );
 
-  console.log("GAMES", numOfGamesWon);
-
   useEffect(() => {
     const gameTimer = setInterval(() => {
       incrementTimer();
@@ -68,6 +68,36 @@ export const Game: React.FC = () => {
       rowLength === 3 &&
       determineThreeInARow(squaresGrid).won &&
       determineThreeInARow(squaresGrid).winner === "o"
+    ) {
+      return setGameLost(true);
+    }
+
+    if (
+      rowLength === 4 &&
+      determineFourInARowForFourByFour(squaresGrid).won &&
+      determineFourInARowForFourByFour(squaresGrid).winner === "x"
+    ) {
+      return setGameWon(true);
+    }
+    if (
+      rowLength === 4 &&
+      determineFourInARowForFourByFour(squaresGrid).won &&
+      determineFourInARowForFourByFour(squaresGrid).winner === "o"
+    ) {
+      return setGameLost(true);
+    }
+
+    if (
+      rowLength === 5 &&
+      determineFiveInARowForFiveByFive(squaresGrid).won &&
+      determineFiveInARowForFiveByFive(squaresGrid).winner === "x"
+    ) {
+      return setGameWon(true);
+    }
+    if (
+      rowLength === 5 &&
+      determineFiveInARowForFiveByFive(squaresGrid).won &&
+      determineFiveInARowForFiveByFive(squaresGrid).winner === "o"
     ) {
       return setGameLost(true);
     }
@@ -275,7 +305,7 @@ const StyledLink = styled(Link)`
 const StyledGameVerdictBanner = styled.div`
   font-size: 34px;
   color: #595959;
-  padding: 5px;
+  padding-top: 15px;
   position: fixed;
 `;
 
