@@ -9,7 +9,7 @@ export const NotFoundError: React.FC = () => {
   const { generateSquaresGrid } = useContext(SquaresContext);
   return (
     <StyledWrapper>
-      <StyledOopsError>
+      <StyledOopsError data-cy="error-message">
         Oops! Something weird happened. <br />
         Click the button below to start a new game
       </StyledOopsError>
