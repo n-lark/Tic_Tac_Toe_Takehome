@@ -6,7 +6,7 @@ type SquareType = {
 export const calculateNextOMove = (
   squaresGrid: Array<Array<SquareType>>,
   oPlayedMoves: Array<Array<number>>
-) => {
+): Array<Array<SquareType>> => {
   const x = [-1, -1, -1, 0, 0, 1, 1, 1];
   const y = [-1, 0, 1, -1, 1, -1, 0, 1];
   let played = false;
@@ -27,11 +27,12 @@ export const calculateNextOMove = (
       ) {
         squaresGrid[rowCurrent][columnCurrent].o = true;
         played = true;
-      } //else {
-      //   return calculateNextOMove(squaresGrid, oPlayedMoves.slice(1));
-      // }
+      }
     }
   });
+  if (!played) {
+    return calculateNextOMove(squaresGrid, oPlayedMoves.slice(1));
+  }
 
   return squaresGrid;
 };
