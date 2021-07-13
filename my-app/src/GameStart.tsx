@@ -2,21 +2,23 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { SquaresContext } from "./Context/SquaresContext";
+import { DifficultyLevelContext } from "./Context/DifficultyLevelContext";
 
 export const GameStart: React.FC = () => {
-  const { GenerateSquaresGrid } = useContext(SquaresContext);
+  const { generateSquaresGrid } = useContext(SquaresContext);
+  const { determineDifficultyLevel } = useContext(DifficultyLevelContext);
   return (
     <StyledWrapper>
       <StyledHeading>Tic Tac Toe</StyledHeading>
       <StyledBy>By Noley Holland</StyledBy>
-
+      <StyledRadioLabel>Grid Size</StyledRadioLabel>
       <StyledRadioWrapper>
         <StyledLabel>
           <StyledInput
             value="easy"
             type="radio"
             name="level"
-            onChange={() => GenerateSquaresGrid(3, 9)}
+            onChange={() => generateSquaresGrid(3, 9)}
           />
           Easy (3 x 3 grid)
         </StyledLabel>
@@ -25,9 +27,9 @@ export const GameStart: React.FC = () => {
             value="medium"
             type="radio"
             name="level"
-            onChange={() => GenerateSquaresGrid(5, 25)}
+            onChange={() => generateSquaresGrid(4, 16)}
           />
-          Medium (5 x 5 grid)
+          Medium (4 x 4 grid)
         </StyledLabel>
         <StyledLabel>
           <StyledInput
@@ -35,13 +37,34 @@ export const GameStart: React.FC = () => {
             value="hard"
             type="radio"
             name="level"
-            onChange={() => GenerateSquaresGrid(7, 49)}
+            onChange={() => generateSquaresGrid(5, 25)}
           />
-          Hard (7 x 7 grid)
+          Hard (5 x 5 grid)
+        </StyledLabel>
+      </StyledRadioWrapper>
+      <StyledRadioLabel>Difficulty</StyledRadioLabel>
+      <StyledRadioWrapper>
+        <StyledLabel>
+          <StyledInput
+            value="easy"
+            type="radio"
+            name="difficulty"
+            onChange={() => determineDifficultyLevel(false)}
+          />
+          Easy{" "}
+        </StyledLabel>
+        <StyledLabel>
+          <StyledInput
+            value="hard"
+            type="radio"
+            name="difficulty"
+            onChange={() => determineDifficultyLevel(true)}
+          />
+          Hard
         </StyledLabel>
       </StyledRadioWrapper>
       <StyledLink to="./Game">
-        <StyledButton data-cy="start-game">Play Game</StyledButton>
+        <StyledButton>Play Game</StyledButton>
       </StyledLink>
     </StyledWrapper>
   );
@@ -53,8 +76,17 @@ const StyledLabel = styled.div`
   font-size: 18px;
 `;
 
+const StyledRadioLabel = styled.div`
+  color: #595959;
+  font-weight: bold;
+  padding-top: 15px;
+  font-size: 18px;
+`;
+
 const StyledRadioWrapper = styled.div`
-  padding: 5px;
+  padding: 10px;
+  display: flex;
+  flex-flow: row nowrap;
 `;
 
 const StyledInput = styled.input`
@@ -86,7 +118,7 @@ const StyledInput = styled.input`
 const StyledBy = styled.div`
   font-weight: normal;
   color: lightgrey;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
 `;
 
 const StyledHeading = styled.h1`
