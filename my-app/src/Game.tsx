@@ -11,8 +11,8 @@ import { isCatsScratch } from "./Utility/isCatsScratch";
 import { Timer } from "./Timer";
 import { HighScore } from "./HighScore";
 import { determineThreeInARow } from "./Utility/determineThreeInARow";
-import { determineFourInARowForFourByFour } from "./Utility/determineFourInARowForFourByFour";
-import { determineFiveInARowForFiveByFive } from "./Utility/determineFiveInARowForFiveByFive";
+import { determineFourInARow } from "./Utility/determineFourInARowr";
+import { determineFiveInARow } from "./Utility/determineFiveInARow";
 
 type GridType = {
   rowLength: number;
@@ -74,30 +74,30 @@ export const Game: React.FC = () => {
 
     if (
       rowLength === 4 &&
-      determineFourInARowForFourByFour(squaresGrid).won &&
-      determineFourInARowForFourByFour(squaresGrid).winner === "x"
+      determineFourInARow(squaresGrid).won &&
+      determineFourInARow(squaresGrid).winner === "x"
     ) {
       return setGameWon(true);
     }
     if (
       rowLength === 4 &&
-      determineFourInARowForFourByFour(squaresGrid).won &&
-      determineFourInARowForFourByFour(squaresGrid).winner === "o"
+      determineFourInARow(squaresGrid).won &&
+      determineFourInARow(squaresGrid).winner === "o"
     ) {
       return setGameLost(true);
     }
 
     if (
       rowLength === 5 &&
-      determineFiveInARowForFiveByFive(squaresGrid).won &&
-      determineFiveInARowForFiveByFive(squaresGrid).winner === "x"
+      determineFiveInARow(squaresGrid).won &&
+      determineFiveInARow(squaresGrid).winner === "x"
     ) {
       return setGameWon(true);
     }
     if (
       rowLength === 5 &&
-      determineFiveInARowForFiveByFive(squaresGrid).won &&
-      determineFiveInARowForFiveByFive(squaresGrid).winner === "o"
+      determineFiveInARow(squaresGrid).won &&
+      determineFiveInARow(squaresGrid).winner === "o"
     ) {
       return setGameLost(true);
     }

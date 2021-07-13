@@ -16,7 +16,7 @@ export const GameStart: React.FC = () => {
   return (
     <StyledWrapper>
       <StyledHeading>Tic Tac Toe</StyledHeading>
-      <StyledRadioLabel>Grid Size</StyledRadioLabel>
+      <StyledRadioLabel>Game Style</StyledRadioLabel>
       <StyledRadioWrapper>
         <StyledLabel>
           <StyledInput
