@@ -25,7 +25,7 @@ export const GameStart: React.FC = () => {
             name="level"
             onChange={() => generateSquaresGrid(3, 9)}
           />
-          Easy (3 x 3 grid)
+          3 in a row (3 x 3 grid)
         </StyledLabel>
         <StyledLabel>
           <StyledInput
@@ -34,7 +34,7 @@ export const GameStart: React.FC = () => {
             name="level"
             onChange={() => generateSquaresGrid(4, 16)}
           />
-          Medium (4 x 4 grid)
+          4 in a row (4 x 4 grid)
         </StyledLabel>
         <StyledLabel>
           <StyledInput
@@ -44,7 +44,7 @@ export const GameStart: React.FC = () => {
             name="level"
             onChange={() => generateSquaresGrid(5, 25)}
           />
-          Hard (5 x 5 grid)
+          5 in a row (5 x 5 grid)
         </StyledLabel>
       </StyledRadioWrapper>
       <StyledRadioLabel>Difficulty</StyledRadioLabel>
