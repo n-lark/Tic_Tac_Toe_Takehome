@@ -24,5 +24,6 @@ npm start
 Run cypress tests:
 
 ```
+cd my-app
 npm run test
 ```
