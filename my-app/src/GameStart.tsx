@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { SquaresContext } from "./Context/SquaresContext";
 import { DifficultyLevelContext } from "./Context/DifficultyLevelContext";
-
+import { TimerContext } from "./Context/TimerContext";
 export const GameStart: React.FC = () => {
   const { generateSquaresGrid } = useContext(SquaresContext);
   const { determineDifficultyLevel } = useContext(DifficultyLevelContext);
+  const { resetTimer } = useContext(TimerContext);
+
+  useEffect(() => {
+    resetTimer();
+  }, [resetTimer]);
 
   return (
     <StyledWrapper>
