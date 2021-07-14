@@ -120,7 +120,7 @@ export const Game: React.FC = () => {
         </StyledStatsWrapper>
         {catsScratch && (
           <StyledGameVerdictBanner>
-            Cats Scratch{" "}
+            Cat's Scratch{" "}
             <FontAwesomeIcon style={{ color: "lightgrey" }} icon={faPaw} />
           </StyledGameVerdictBanner>
         )}

@@ -11,6 +11,20 @@ export const calculateNextOMove = (
   const y = [-1, 0, 1, -1, 1, -1, 0, 1];
   let played = false;
 
+  if (oPlayedMoves.length === 0) {
+    let randomPlay = false;
+    const squaresGridWithRandomMove = squaresGrid.map((square) => {
+      return square.map((piece) => {
+        if (!piece.x && !piece.o && !randomPlay) {
+          piece.o = true;
+          randomPlay = true;
+        }
+        return piece;
+      });
+    });
+    return squaresGridWithRandomMove;
+  }
+
   x.forEach((r, i) => {
     let rowCurrent = oPlayedMoves[0][0] + r;
     let columnCurrent = oPlayedMoves[0][1] + y[i];

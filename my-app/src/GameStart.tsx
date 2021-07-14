@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { SquaresContext } from "./Context/SquaresContext";
 import { DifficultyLevelContext } from "./Context/DifficultyLevelContext";
 import { TimerContext } from "./Context/TimerContext";
+
 export const GameStart: React.FC = () => {
   const { generateSquaresGrid } = useContext(SquaresContext);
   const { determineDifficultyLevel } = useContext(DifficultyLevelContext);
