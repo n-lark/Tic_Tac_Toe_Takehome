@@ -16,6 +16,7 @@ Run the app in the browser:
 
 ```
 cd my-app
+npm install
 npm start
 ```
 
